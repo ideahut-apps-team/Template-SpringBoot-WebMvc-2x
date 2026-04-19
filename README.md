@@ -63,6 +63,15 @@
     application-postgresql.yml
     application-sqlserver.yml
     ```
+##
+
+### Admin
+- `URL`  : http://localhost:5401/_/web
+- `User` : admin
+- `Pass` : password
+<div align="left">
+   <img src="./screenshot.png" alt="" width="800" />
+</div>
 
 ##
 
