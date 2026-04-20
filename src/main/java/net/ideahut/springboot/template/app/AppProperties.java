@@ -160,22 +160,20 @@ public class AppProperties {
 		private AgroalDefinition agroal;
 		private DbcpDefinition dbcp;
 		public static DatasourceDefinition getDefinition(TrxDatasource datasource) {
-			return ObjectHelper.callIf(
-				datasource != null, 
-				() -> {
-					Type type = ObjectHelper.useOrDefault(datasource.getType(), () -> Type.BASIC);
-					switch (type) {
-					case HIKARI:
-						return datasource.getHikari();
-					case AGROAL:
-						return datasource.getAgroal();
-					case DBCP:
-						return datasource.getDbcp();
-					default:
-						return datasource.getBasic();
-					}
+			if (datasource != null) {
+				Type type = ObjectHelper.useOrDefault(datasource.getType(), () -> Type.BASIC);
+				switch (type) {
+				case HIKARI:
+					return datasource.getHikari();
+				case AGROAL:
+					return datasource.getAgroal();
+				case DBCP:
+					return datasource.getDbcp();
+				default:
+					return datasource.getBasic();
 				}
-			);
+			}
+			return null;
 		}
 	}
 	

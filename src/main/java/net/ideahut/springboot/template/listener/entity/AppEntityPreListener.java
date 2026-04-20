@@ -10,7 +10,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import net.ideahut.springboot.entity.EntityPreListener;
-import net.ideahut.springboot.helper.ObjectHelper;
 import net.ideahut.springboot.task.TaskHandler;
 import net.ideahut.springboot.template.app.AppConstant;
 
@@ -39,7 +38,9 @@ class AppEntityPreListener implements EntityPreListener, InitializingBean {
 	public void onPreInsert(Object entity) {
 		taskHandler.execute(() -> {
 			EntityPreListener listener = listeners.get(entity.getClass());
-			ObjectHelper.runIf(listener != null, () -> listener.onPreInsert(entity));
+			if (listener != null) {
+				listener.onPreInsert(entity);
+			}
 		});
 	}
 	
@@ -47,7 +48,9 @@ class AppEntityPreListener implements EntityPreListener, InitializingBean {
 	public void onPreUpdate(Object entity) {
 		taskHandler.execute(() -> {
 			EntityPreListener listener = listeners.get(entity.getClass());
-			ObjectHelper.runIf(listener != null, () -> listener.onPreUpdate(entity));
+			if (listener != null) {
+				listener.onPreUpdate(entity);
+			}
 		});
 	}
 
@@ -55,7 +58,9 @@ class AppEntityPreListener implements EntityPreListener, InitializingBean {
 	public void onPreDelete(Object entity) {
 		taskHandler.execute(() -> {
 			EntityPreListener listener = listeners.get(entity.getClass());
-			ObjectHelper.runIf(listener != null, () -> listener.onPreDelete(entity));
+			if (listener != null) {
+				listener.onPreDelete(entity);
+			}
 		});
 	}
 	

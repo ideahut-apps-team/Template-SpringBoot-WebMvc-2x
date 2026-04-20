@@ -129,6 +129,7 @@ class DevController {
 	/*
 	 * Contoh multipart
 	 */
+	@Public
 	@PostMapping(value = "/multipart")
 	Result receive(
 		@RequestParam(name = "name") String name,

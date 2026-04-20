@@ -70,7 +70,7 @@
 - `User` : admin
 - `Pass` : password
 <div align="left">
-   <img src="./screenshot.png" alt="" width="800" />
+   <img src="./admin.png" alt="" width="800" />
 </div>
 
 ##

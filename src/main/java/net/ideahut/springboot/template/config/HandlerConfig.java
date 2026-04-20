@@ -61,6 +61,7 @@ import net.ideahut.springboot.template.support.GridSupport;
  * - GridHandler
  * - InitHandler
  * - MailHandler
+ * - ReportHandler
  * - RestHandler
  * - SysParamHandler
  * - SchedulerHandler

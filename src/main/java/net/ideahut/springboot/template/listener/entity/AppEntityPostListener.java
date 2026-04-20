@@ -13,7 +13,6 @@ import net.ideahut.springboot.api.ApiHandler;
 import net.ideahut.springboot.audit.AuditHandler;
 import net.ideahut.springboot.bean.BeanConfigure;
 import net.ideahut.springboot.entity.EntityPostListener;
-import net.ideahut.springboot.helper.ObjectHelper;
 import net.ideahut.springboot.module.ModuleApi;
 import net.ideahut.springboot.module.ModuleSysParam;
 import net.ideahut.springboot.sysparam.SysParamHandler;
@@ -61,7 +60,9 @@ class AppEntityPostListener implements EntityPostListener, BeanConfigure {
 		auditHandler.save("INSERT", entity);
 		taskHandler.execute(() -> {
 			EntityPostListener listener = listeners.get(entity.getClass());
-			ObjectHelper.runIf(listener != null, () -> listener.onPostInsert(entity));
+			if (listener != null) {
+				listener.onPostInsert(entity);
+			}
 		});
 	}
 
@@ -70,7 +71,9 @@ class AppEntityPostListener implements EntityPostListener, BeanConfigure {
 		auditHandler.save("UPDATE", entity);
 		taskHandler.execute(() -> {
 			EntityPostListener listener = listeners.get(entity.getClass());
-			ObjectHelper.runIf(listener != null, () -> listener.onPostUpdate(entity));
+			if (listener != null) {
+				listener.onPostUpdate(entity);
+			}
 		});
 	}
 	
@@ -79,7 +82,9 @@ class AppEntityPostListener implements EntityPostListener, BeanConfigure {
 		auditHandler.save("DELETE", entity);
 		taskHandler.execute(() -> {
 			EntityPostListener listener = listeners.get(entity.getClass());
-			ObjectHelper.runIf(listener != null, () -> listener.onPostDelete(entity));
+			if (listener != null) {
+				listener.onPostDelete(entity);
+			}
 		});
 	}
 	
