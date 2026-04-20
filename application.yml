@@ -176,7 +176,7 @@ spring:
             #- org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration
             #- org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryAutoConfiguration
             #- org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
-            - org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration            
+            - org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration      
             
     ## (SBADMIN)
     boot:
