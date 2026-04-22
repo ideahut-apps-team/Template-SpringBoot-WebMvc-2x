@@ -17,7 +17,7 @@
 
 ### Untuk mencoba versi Spring Boot tertentu:
 * Rename pom-2.xx.x.xml menjadi menjadi __pom.xml__.
-    ```yml
+    ```yaml
     pom-2.4x.1.xml
     pom-2.5x.1.xml
     pom-2.6x.1.xml
@@ -38,7 +38,7 @@
 
 ### Untuk mencoba database tertentu:
 * Ubah properties __'spring.profiles.active'__ sesuai dengan database yang diinginkan.
-    ```yml
+    ```yaml
     spring:
         profiles:
             #active: "db2"
@@ -51,17 +51,17 @@
             #active: "postgresql"
             #active: "sqlserver"
     ```
-* Edit file __'application-{profile}.yml'__, pastikan host, port, username, dan password sesuai dengan server database yang digunakan.
-    ```yml
-    application-db2.yml
-    application-derby.yml
-    application-h2.yml
-    application-hsql.yml
-    application-mariadb.yml
-    application-mysql.yml
-    application-oracle.yml
-    application-postgresql.yml
-    application-sqlserver.yml
+* Edit file __'application-{profile}.yaml'__, pastikan host, port, username, dan password sesuai dengan server database yang digunakan.
+    ```yaml
+    application-db2.yaml
+    application-derby.yaml
+    application-h2.yaml
+    application-hsql.yaml
+    application-mariadb.yaml
+    application-mysql.yaml
+    application-oracle.yaml
+    application-postgresql.yaml
+    application-sqlserver.yaml
     ```
 ##
 
