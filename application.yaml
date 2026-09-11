@@ -318,7 +318,7 @@ config:
     #
     foreignKey:
         enableExecution: true
-        asyncExecution: false
+        asyncExecution: true
         dropBeforeCreate: true
         onUpdateAction: true
 
@@ -383,14 +383,13 @@ config:
             standalone:
                 host: '<HOST>'
                 port: '<PORT>'
-                password: '<PASSWORD>'
+                #password: '<PASSWORD>'
                 database: 0
         access:
             type: 0
             standalone:
                 host: '<HOST>'
                 port: '<PORT>'
-                password: '<PASSWORD>'
                 database: 1
                 
     #
@@ -438,7 +437,7 @@ config:
     api:
         handler:
             enableCrud: true
-            enableSync: true
+            enableSync: false
             enableConsumer: true
             configureThreads: 2
             redisParam:

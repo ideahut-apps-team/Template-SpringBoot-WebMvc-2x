@@ -20,7 +20,6 @@
 	</parent>
 	
 	<properties>
-		<main-class>net.ideahut.springboot.template.Application</main-class>
 		
 		<maven.test.skip>true</maven.test.skip>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -34,7 +33,7 @@
         <version.commons-io>2.21.0</version.commons-io>
         <version.fory>1.6.1</version.fory>
         <version.hessian>4.0.66</version.hessian>
-        <version.ideahut>26.08.26</version.ideahut>
+        <version.ideahut>26.09.09</version.ideahut>
         <version.jasperreports>6.21.5</version.jasperreports>
         <version.javax-mail>1.6.2</version.javax-mail>
         <version.jbcrypt>0.4</version.jbcrypt>
@@ -112,6 +111,10 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-hibernate5</artifactId>
 		</dependency>
 		
 		
@@ -266,6 +269,14 @@
 		</dependency>
 
 
+		<!--
+		 +++++++++++++++++
+		 +               +
+		 +  JDBC DRIVER  +
+		 +               +
+		 +++++++++++++++++ 
+		-->
+
 		<!-- MYSQL -->
 		<dependency>
 			<groupId>com.mysql</groupId>
@@ -273,13 +284,11 @@
 			<version>${version.mysql-connector-java}</version>
 		</dependency>
 
-
 		<!-- POSTGRESQL -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 		</dependency>
-
 
 		<!-- SQL SERVER -->
 		<dependency>
@@ -287,13 +296,11 @@
 			<artifactId>mssql-jdbc</artifactId>
 		</dependency>
 
-
 		<!-- ORACLE -->
 		<dependency>
 		    <groupId>com.oracle.database.jdbc</groupId>
 		    <artifactId>ojdbc8</artifactId>
 		</dependency>
-
 
 		<!-- MARIADB -->
 		<dependency>
@@ -301,13 +308,11 @@
   			<artifactId>mariadb-java-client</artifactId>
 		</dependency>
 
-
 		<!-- DB2 -->
 		<dependency>
 			<groupId>com.ibm.db2</groupId>
 		  	<artifactId>jcc</artifactId>
 		</dependency>
-
 
 		<!-- H2 -->
 		<dependency>
@@ -315,13 +320,11 @@
 		    <artifactId>h2</artifactId>
 		</dependency>
 
-
 		<!-- HSQLDB -->
 		<dependency>
 		    <groupId>org.hsqldb</groupId>
 		    <artifactId>hsqldb</artifactId>
 		</dependency>
-
 
 		<!-- DERBY -->
 		<dependency>

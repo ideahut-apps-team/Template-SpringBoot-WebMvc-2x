@@ -50,6 +50,13 @@ class CommonConfig {
 	 */
 	@Bean
 	DataMapper dataMapper() {
+		/**
+		MapperProperties properties = new MapperProperties()
+		.setMapperFeature(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+		.setMapperFeature(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+		.setIncludeNullValue(false)
+		.addModule(new Hibernate5Module());
+		**/
 		DataMapper dataMapper = new DataMapperImpl();
 		FrameworkHelper.setDefaultDataMapper(dataMapper);
 		return dataMapper;
