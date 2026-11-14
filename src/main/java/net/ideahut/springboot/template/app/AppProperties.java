@@ -121,29 +121,6 @@ public class AppProperties {
 		private TaskProperties webAsync;
 	}
 	
-	/*
-	 * TRX MANAGER
-	 */
-	@Setter
-	@Getter
-	public static class TrxManager {
-		private TrxMain primary;
-		private TrxMain secondary;
-	}
-	@Setter
-	@Getter
-	public static class TrxAudit extends HibernateDefinition {
-		private static final long serialVersionUID = 9034867557069137429L;
-		private String id;
-		private TrxDatasource datasource;
-	}
-	@Setter
-	@Getter
-	public static class TrxMain extends HibernateDefinition {
-		private static final long serialVersionUID = -2694948973154051954L;
-		private TrxDatasource datasource;
-		private TrxAudit audit;
-	}
 	@Getter
 	@Setter
 	public static class TrxDatasource implements Serializable {
@@ -161,7 +138,7 @@ public class AppProperties {
 		private DbcpDefinition dbcp;
 		public static DatasourceDefinition getDefinition(TrxDatasource datasource) {
 			if (datasource != null) {
-				Type type = ObjectHelper.useOrDefault(datasource.getType(), () -> Type.BASIC);
+				Type type = ObjectHelper.useOrDefault(datasource.getType(), Type.BASIC);
 				switch (type) {
 				case HIKARI:
 					return datasource.getHikari();
@@ -175,6 +152,29 @@ public class AppProperties {
 			}
 			return null;
 		}
+	}
+	
+	@Setter
+	@Getter
+	public static class TrxAudit extends HibernateDefinition {
+		private static final long serialVersionUID = 4540326408526410239L;
+		private String id;
+		private TrxDatasource datasource;
+	}
+	
+	@Setter
+	@Getter
+	public static class TrxMain extends HibernateDefinition {
+		private static final long serialVersionUID = -4930835621825241465L;
+		private TrxDatasource datasource;
+		private TrxAudit audit;
+	}
+	
+	@Setter
+	@Getter
+	public static class TrxManager {
+		private TrxMain primary;
+		private TrxMain secondary;
 	}
 	
 }

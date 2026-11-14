@@ -21,7 +21,7 @@ import net.ideahut.springboot.generator.OdtIdGenerator;
 @Table(
 	name = "user_account", 
 	indexes = { 
-		@Index( name = "idx_user_account__username", columnList = "username")
+		@Index( name = "ix_user_account__username", columnList = "username")
 	}
 )
 @Setter

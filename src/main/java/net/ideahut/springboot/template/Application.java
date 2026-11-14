@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.ideahut.springboot.definition.LauncherDefinition;
 import net.ideahut.springboot.helper.FrameworkHelper;
 import net.ideahut.springboot.helper.ObjectHelper;
+import net.ideahut.springboot.job.SchedulerHandler;
 import net.ideahut.springboot.launcher.WebLauncher;
 import net.ideahut.springboot.launcher.WebMvcLauncher;
 import net.ideahut.springboot.template.app.AppProperties;
@@ -54,6 +55,14 @@ public class Application extends WebMvcLauncher {
 	@Override
 	public void onReady(ApplicationContext applicationContext) {
 		setReady(true);
+		AppProperties appProperties = FrameworkHelper.getBean(applicationContext, AppProperties.class);
+		if (Boolean.TRUE.equals(appProperties.getAutoStartScheduler())) {
+			try {
+				FrameworkHelper.getBean(applicationContext, SchedulerHandler.class).start();
+			} catch (Exception e) {
+				log.error("Failed to start Scheduler");
+			}
+		}
 	}
 	
 	/*
@@ -75,7 +84,7 @@ public class Application extends WebMvcLauncher {
 		String message, 
 		Throwable throwable
 	) {
-		level = ObjectHelper.useOrDefault(level, () -> LauncherDefinition.Log.Level.DEBUG);
+		level = ObjectHelper.useOrDefault(level, LauncherDefinition.Log.Level.DEBUG);
 		switch (level) {
 		case TRACE:
 			log.trace(message, throwable);

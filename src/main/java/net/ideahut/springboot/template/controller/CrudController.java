@@ -1,6 +1,9 @@
 package net.ideahut.springboot.template.controller;
 
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +27,8 @@ import net.ideahut.springboot.crud.CrudHandler;
 import net.ideahut.springboot.crud.CrudPermission;
 import net.ideahut.springboot.crud.CrudResource;
 import net.ideahut.springboot.crud.WebMvcCrudController;
+import net.ideahut.springboot.helper.ErrorHelper;
+import net.ideahut.springboot.helper.StringHelper;
 import net.ideahut.springboot.object.Result;
 import net.ideahut.springboot.task.TaskHandler;
 
@@ -32,12 +38,28 @@ import net.ideahut.springboot.task.TaskHandler;
  * Untuk di level Controller hanya akan berlaku di setiap pemanggilan endpoint Crud
  */
 
-//@Public(always = true)
 @Public
 @ComponentScan
 @RestController
 @RequestMapping("/crud")
 class CrudController extends WebMvcCrudController {
+	
+	private static final Map<String, Collection<CrudAction>> METHOD_CRUD_ACTIONS;
+	static {
+		METHOD_CRUD_ACTIONS = new HashMap<>();
+		METHOD_CRUD_ACTIONS.put(HttpMethod.GET.name(), Arrays.asList(
+			CrudAction.UNIQUE, CrudAction.SINGLE, CrudAction.PAGE, CrudAction.LIST, CrudAction.MAP
+		));
+		METHOD_CRUD_ACTIONS.put(HttpMethod.POST.name(), Arrays.asList(
+			CrudAction.CREATE, CrudAction.CREATES, CrudAction.SAVE, CrudAction.SAVES
+		));
+		METHOD_CRUD_ACTIONS.put(HttpMethod.PUT.name(), Arrays.asList(
+			CrudAction.UPDATE, CrudAction.UPDATES, CrudAction.SAVE, CrudAction.SAVES
+		));
+		METHOD_CRUD_ACTIONS.put(HttpMethod.DELETE.name(), Arrays.asList(
+			CrudAction.DELETE, CrudAction.DELETES
+		));
+	}
 	
 	private final CrudHandler crudHandler;
 	private final CrudResource crudResource;
@@ -132,7 +154,12 @@ class CrudController extends WebMvcCrudController {
 		@PathVariable("action") String action,
 		HttpServletRequest httpRequest
 	) {
-		return super.parameter(CrudAction.of(action), httpRequest);		
+		String httpMethod = httpRequest.getMethod();
+		CrudAction crudAction = CrudAction.of(action);
+		Collection<CrudAction> crudActions = METHOD_CRUD_ACTIONS.get(httpMethod);
+		ErrorHelper.throwEmpty(crudActions, () -> StringHelper.format("Unsupported method: {}", httpMethod));
+		ErrorHelper.throwIf(!crudActions.contains(crudAction), () -> StringHelper.format("Invald action: {} for method: {}", crudAction, httpMethod));
+		return super.parameter(crudAction, httpRequest);	
 	}
 	
 	/*

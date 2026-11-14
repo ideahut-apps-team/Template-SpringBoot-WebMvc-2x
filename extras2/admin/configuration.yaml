@@ -1,0 +1,81 @@
+waitForJobsToCompleteWhenStopScheduler: false
+collectDatabaseMetadata: true
+showOnlyExecutableRedis: true
+maskingPasswordProperties: true
+
+central:
+   webEndpoint: "https://central.ideahut.net/sync/web"
+   tokenEndpoint: "https://central.ideahut.net/sync/token"
+
+api:
+   timeout: 30
+   debug: true
+
+web:
+   title: "Template-SpringBoot-WebMvc-2x"
+   #logo: "file:{user.dir}/extras/admin/logo.png"
+   alwaysToIndex: true
+   color:
+      ## css color
+      header: ""
+      title: ""
+      primary: ""
+      secondary: ""
+      accent: ""
+      dark: ""
+      positive: ""
+      negative: ""
+      info: ""
+      warning: ""
+   menuTitle:
+      # title berdasarkan menu yang aktif
+      parentMenu: true
+      separator: " &rarr; "
+   allowedPaths:
+      ## path yang diizinkan untuk diakses
+      - "assets"
+      - "icons"
+      - "favicon.ico"
+      - "index.html"
+      - "logo.png"
+
+grid:
+   enable: true
+   location: "file:{user.dir}/extras/admin/grid/**/*.yaml"
+   definition: "file:{user.dir}/extras/admin/grid/grid.def"
+
+crud:
+   maxLimit: 200
+   useNative: false
+
+role:
+   definitionFile: "file:{user.dir}/extras/admin/roles.yaml"
+
+modules:
+   reload:
+      icon: "cloud_sync"
+      #title:
+      #enable:
+      #order:
+      #path:
+   cache:
+       icon: "outbox"
+   lister:
+       icon: "list"
+   redis:
+       icon: "storage"
+   grid:
+       icon: "grid_on"
+   audit:
+       icon: "receipt_long"
+   kafka:
+       icon: "air"
+   entity:
+       icon: "schema"
+   scheduler:
+       icon: "schedule"
+   task:
+       icon: "pending_actions"
+   request:
+       icon: "route"
+       title: "Endpoint"
