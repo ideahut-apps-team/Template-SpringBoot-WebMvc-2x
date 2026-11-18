@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.HandlerMapping;
 
+import net.ideahut.springboot.annotation.Body;
 import net.ideahut.springboot.annotation.Public;
 import net.ideahut.springboot.api.ApiService;
 import net.ideahut.springboot.api.ApiSource;
@@ -28,6 +29,7 @@ import net.ideahut.springboot.rest.RestResponse;
 /*
  * API untuk request ke ApiService yang lain
  */
+@Public
 @ComponentScan
 @RestController
 @RequestMapping("/proxy")
@@ -48,7 +50,6 @@ class ProxyController {
 	 * Meminta token API consumer untuk melakukan request
 	 * Token akan disimpan di SysParams, sysCode = "API_TOKEN", paramCode = <API_NAME>
 	 */
-	@Public
 	@PostMapping("/token")
 	public String token(
 		@RequestParam("apiName") String apiName
@@ -63,7 +64,7 @@ class ProxyController {
 	 * - semua http method diijinkan
 	 * 
 	 */
-	@Public
+	@Body
 	@RequestMapping(
 		path = "/request/{apiName}/**", 
 		method = { 
